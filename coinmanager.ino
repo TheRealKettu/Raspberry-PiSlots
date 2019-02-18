@@ -1,6 +1,6 @@
 /* 
  This is the money controller for the raspberry pi slotmachine. 
- 9600 BAUDRATE
+ 115200 BAUDRATE
 
  Outgoing commands;
  coin :sends a coin pulse
