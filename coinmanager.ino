@@ -17,6 +17,7 @@
 Servo servo;
 
 // variables
+int ledPin = 13;
 int coinamt = 0;
 const byte coinSig = 2;
 
@@ -25,6 +26,7 @@ bool previousCoinSignal = false;
 
 void setup() {
   Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
   pinMode( coinSig, INPUT_PULLUP);
   previousCoinSignal = digitalRead(coinSig);
   servo.attach(9);
