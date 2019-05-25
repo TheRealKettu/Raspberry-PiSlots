@@ -12,7 +12,7 @@
 # Design by Ferenc Nagy <nferencfx@gmail.com>
 # Project web site: http://bfruit.sf.net
 #
-# piSlots: TheRealKettu
+# piSlots: Jesper Rasehorn: https://github.com/TheRealKettu/Raspberry-PiSlots
 
 import pygame
 from pygame.locals import *
@@ -27,9 +27,9 @@ from threading import Thread
 
 ser = serial.Serial("/dev/ttyACM0",115200)
 
-credit = 0
+credit = 0 # Credits in the game. 1 credit = 0.20 €.
 
-def worker():
+def worker(): # Adds one credit per one "coin" message from arduino. 
 	
 	global credit
 	twentycent = 1

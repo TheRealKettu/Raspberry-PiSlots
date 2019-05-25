@@ -1,4 +1,6 @@
 /* 
+ Written by Jesper Rasehorn https://github.com/TheRealKettu/Raspberry-PiSlots
+ 
  This is the money controller for the raspberry pi slotmachine. 
  115200 BAUDRATE
 
@@ -16,16 +18,16 @@
 #include <Servo.h>
 Servo servo;
 
-// variables
-int ledPin = 13;
-int coinamt = 0;
+// variables and etc
+int ledPin = 13; //just to turn off the led.
+int coinamt = 0; //Just remembers how many coins are inside
 const byte coinSig = 2;
 
 bool previousCoinSignal = false;
 
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200); //Setting the pinmodes and serial.
   pinMode(ledPin, OUTPUT);
   pinMode( coinSig, INPUT_PULLUP);
   previousCoinSignal = digitalRead(coinSig);
@@ -34,7 +36,7 @@ void setup() {
 }
 
 
-void cashout() {
+void cashout() { //Coin hopper code. Somewhat complete, works with my shitty 3d printed cardboard hopper.
   Serial.println("Cashout command received. Paying out.");
     
   coinamt = Serial.parseInt();
@@ -53,17 +55,17 @@ void cashout() {
 
 
 
-void loop() {
+void loop() { //Main code
 
 
   if (Serial.available() > 0) {
     char ch = Serial.read();
     delay(5);
-    if (ch == 'c') {
+    if (ch == 'c') { //Clears the bank if needed.
       coinamt = 0;
       Serial.println("Bank Value cleared.");
     }
-    if (ch == 'p') {
+    if (ch == 'p') { //Cashouts.
       cashout();
     }
   }
@@ -74,8 +76,8 @@ void loop() {
     //save the state for the next iteration
     previousCoinSignal = currentCoinSignal;
 
-    if (currentCoinSignal == HIGH) {
-     Serial.println("coin");     
+    if (currentCoinSignal == HIGH) { //Send the coin signal to the raspberry pi.
+     Serial.println("coin");    
     }
     
   }
